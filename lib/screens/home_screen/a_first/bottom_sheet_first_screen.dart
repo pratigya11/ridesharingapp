@@ -335,23 +335,23 @@ class _BottomScreenState extends State<BottomScreen> {
                           child: Stack(
                             alignment: Alignment.centerLeft,
                             children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Set on map",
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: ColorConstant.gray900,
-                                    fontSize: getFontSize(
-                                      16,
-                                    ),
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
+                              // Align(
+                              //   alignment: Alignment.centerLeft,
+                              //   child: Text(
+                              //     "Set on map",
+                              //     overflow: TextOverflow.ellipsis,
+                              //     textAlign: TextAlign.left,
+                              //     style: TextStyle(
+                              //       color: ColorConstant.gray900,
+                              //       fontSize: getFontSize(
+                              //         16,
+                              //       ),
+                              //       fontFamily: 'Inter',
+                              //       fontWeight: FontWeight.w400,
+                              //       letterSpacing: 0.50,
+                              //     ),
+                              //   ),
+                              // ),
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(

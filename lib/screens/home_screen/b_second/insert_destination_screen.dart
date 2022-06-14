@@ -7,6 +7,7 @@ import 'package:ride_sharing_app/screens/home_screen/c_third/confirm_destination
 import '../../../utils/staticWidget.dart';
 import 'package:google_place/google_place.dart';
 
+// ignore: must_be_immutable
 class DestinationPage extends StatefulWidget {
   DestinationPage({Key? key, required this.onPressed});
   Function onPressed;
@@ -16,7 +17,7 @@ class DestinationPage extends StatefulWidget {
 
 class _DestinationPageState extends State<DestinationPage> {
   final _endSearchFieldController = TextEditingController();
-  final _endFocusNode = FocusNode();
+
   late GooglePlace _googlePlace;
 
   List<SearchResult> _predictions = [];
@@ -41,8 +42,21 @@ class _DestinationPageState extends State<DestinationPage> {
     if (result != null && result.results != null && mounted) {
       setState(() {
         _predictions = result.results!;
+        predictionLength();
       });
     }
+  }
+
+  int predictionLength() {
+    int length = 0;
+    if (_predictions.isEmpty) {
+      length = 0;
+    } else if (_predictions.length < 10) {
+      length = _predictions.length;
+    } else {
+      length = 10;
+    }
+    return length;
   }
 
   void submitSuggestion(String title, String address, int index) async {
@@ -59,7 +73,9 @@ class _DestinationPageState extends State<DestinationPage> {
     }
     if (_endSearchFieldController.text.isNotEmpty && endPosition != null) {
       Navigator.of(context).pushNamed(ConfirmDestinationScreen.routeName,
-          arguments: [title, address]);
+          arguments: ['Chakupath pulchowk', title, address]);
+
+      //sending origin,destination name and formatted address
     }
   }
 
@@ -542,7 +558,7 @@ class _DestinationPageState extends State<DestinationPage> {
                         child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: _predictions.length,
+                          itemCount: predictionLength(),
                           itemBuilder: (context, index) {
                             return InsertDestinationWidget(
                                 _predictions[index].name!,

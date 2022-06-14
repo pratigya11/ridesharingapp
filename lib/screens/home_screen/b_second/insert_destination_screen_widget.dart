@@ -13,7 +13,7 @@ class InsertDestinationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => submitSuggestion(title, address, index),
       onDoubleTap: () => submitSuggestion(title, address, index),
       onLongPress: () => submitSuggestion(title, address, index),
@@ -28,62 +28,62 @@ class InsertDestinationWidget extends StatelessWidget {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            FittedBox(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: getVerticalSize(
-                    8.00,
-                  ),
-                  bottom: getVerticalSize(
-                    8.00,
-                  ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: getVerticalSize(
+                  8.00,
                 ),
-                child: Container(
-                  height: getSize(
-                    24.00,
-                  ),
-                  width: getSize(
-                    24.00,
-                  ),
-                  child: SvgPicture.asset(
-                    ImageConstant.imgCarbonlocation1,
-                    fit: BoxFit.fill,
-                  ),
+                bottom: getVerticalSize(
+                  8.00,
+                ),
+              ),
+              child: Container(
+                height: getSize(
+                  24.00,
+                ),
+                width: getSize(
+                  24.00,
+                ),
+                child: SvgPicture.asset(
+                  ImageConstant.imgCarbonlocation1,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-            FittedBox(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: getHorizontalSize(
-                    15.00,
-                  ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getHorizontalSize(
+                  15.00,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FittedBox(
-                      child: Text(
-                        title,
-                        softWrap: false,
-                        overflow: TextOverflow.fade,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: ColorConstant.gray900,
-                          fontSize: getFontSize(
-                            14,
-                          ),
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.50,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: getHorizontalSize(300),
+                    child: Text(
+                      title,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: ColorConstant.gray900,
+                        fontSize: getFontSize(
+                          14,
                         ),
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.50,
                       ),
                     ),
-                    Padding(
+                  ),
+                  SizedBox(
+                    width: getHorizontalSize(300),
+                    child: Padding(
                       padding: EdgeInsets.only(
                         top: getVerticalSize(
                           5.00,
@@ -107,8 +107,8 @@ class InsertDestinationWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
