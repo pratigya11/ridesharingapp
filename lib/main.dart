@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ride_sharing_app/first_selection_screens/selection_screen.dart';
+import 'package:ride_sharing_app/screens/home_screen/c_third/confirm_destination_screen.dart';
 
 
 Future<void> main() async{
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ride Sharing App',
       home: StartingScreen(),
+      routes: {
+        ConfirmDestinationScreen.routeName:(ctx)=>ConfirmDestinationScreen()
+      },
     );
   }
 }

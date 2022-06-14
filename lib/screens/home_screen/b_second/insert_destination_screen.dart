@@ -1,23 +1,81 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:ride_sharing_app/app_export.dart';
 import 'package:ride_sharing_app/screens/home_screen/b_second/insert_destination_screen_widget.dart';
 import 'package:ride_sharing_app/screens/home_screen/c_third/confirm_destination_screen.dart';
 import '../../../utils/staticWidget.dart';
+import 'package:google_place/google_place.dart';
 
 class DestinationPage extends StatefulWidget {
-  DestinationPage({ Key? key, required this.onPressed});
+  DestinationPage({Key? key, required this.onPressed});
   Function onPressed;
   @override
   _DestinationPageState createState() => _DestinationPageState();
 }
 
 class _DestinationPageState extends State<DestinationPage> {
+  final _endSearchFieldController = TextEditingController();
+  final _endFocusNode = FocusNode();
+  late GooglePlace _googlePlace;
+
+  List<SearchResult> _predictions = [];
+  DetailsResult? endPosition;
 
   @override
+  void initState() {
+    String apiKey = 'AIzaSyAZ6HwE0tRcLWAaQU8UZllVg1qmXGnDna4';
+    _googlePlace = GooglePlace(apiKey);
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void autoCompleteSearch(String value) async {
+    // var resultAddress = await _googlePlace.autocomplete.get(value);
+
+    var result = await _googlePlace.search.getNearBySearch(
+        Location(lat: 27.810984, lng: 85.284879), 14021,
+        keyword: value);
+
+    if (result != null && result.results != null && mounted) {
+      setState(() {
+        _predictions = result.results!;
+      });
+    }
+  }
+
+  void submitSuggestion(String title, String address, int index) async {
+    final placeId = _predictions[index].placeId;
+    final details = await _googlePlace.details.get(placeId!);
+
+    if (details != null && details.result != null && mounted) {
+      setState(() {
+        endPosition = details.result;
+        _endSearchFieldController.text = title + ',' + address;
+
+        _predictions = [];
+      });
+    }
+    if (_endSearchFieldController.text.isNotEmpty && endPosition != null) {
+      Navigator.of(context).pushNamed(ConfirmDestinationScreen.routeName,
+          arguments: [title, address]);
+    }
+  }
+
+  String _validator(String raw) {
+    String result;
+    RegExp regExp = RegExp(r'^([A-Z0-9]+)(\+)([A-Z0-9]+)(,)(.*)$');
+
+    final RegExpMatch? match = regExp.firstMatch(raw);
+
+    if (match?.group(1) == null) {
+      result = raw;
+    } else {
+      result = match!.group(5).toString();
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,9 +259,9 @@ class _DestinationPageState extends State<DestinationPage> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.only(
@@ -254,12 +312,14 @@ class _DestinationPageState extends State<DestinationPage> {
                                 ),
                               ),
                               InkWell(
-                                onTap: (){
-                                  print("vdsh");
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => ConfirmDestinationScreen()),
-                                  );
+                                onTap: () {
+                                  // print("vdsh");
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           ConfirmDestinationScreen()),
+                                  // );
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(
@@ -322,8 +382,20 @@ class _DestinationPageState extends State<DestinationPage> {
                                   374.00,
                                 ),
                                 child: TextFormField(
+                                  onChanged: (value) {
+                                    if (value.isNotEmpty) {
+                                      autoCompleteSearch(value);
+                                    } else {
+                                      setState(() {
+                                        _predictions = [];
+                                        endPosition = null;
+                                      });
+                                    }
+                                  },
+                                  autofocus: true,
+                                  controller: _endSearchFieldController,
                                   decoration: InputDecoration(
-                                    hintText: 'LR',
+                                    hintText: 'Choose a destination',
                                     hintStyle: TextStyle(
                                       fontSize: getFontSize(
                                         14.0,
@@ -470,13 +542,16 @@ class _DestinationPageState extends State<DestinationPage> {
                         child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 3,
+                          itemCount: _predictions.length,
                           itemBuilder: (context, index) {
-                            return InsertDestinationWidget();
+                            return InsertDestinationWidget(
+                                _predictions[index].name!,
+                                _validator(_predictions[index].vicinity!),
+                                submitSuggestion,
+                                index);
                           },
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -488,101 +563,92 @@ class _DestinationPageState extends State<DestinationPage> {
     );
   }
 
-
   bool isShow = false;
   bool _isDestinationSelected = true;
   TextField() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-            0, 10, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(20,0,10,0),
+              margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
               child: Text("tRY"),
-              width: 20, height: 20,
+              width: 20,
+              height: 20,
             ),
             Expanded(
               child: Padding(
-                  padding:
-                  const EdgeInsets
-                      .only(
-                      right: 10),
-                  child:               Container(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
                     color: Colors.black.withOpacity(0.08),
-                    padding:
-                    const EdgeInsets
-                        .only(
-                        left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: TextFormField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText:  'Searching...',hintStyle: TextStyle(fontSize: 14),
+                        hintText: 'Searching...',
+                        hintStyle: TextStyle(fontSize: 14),
                         labelStyle: TextStyle(fontSize: 14),
                         suffixIcon: new FlatButton(
-                          onPressed: () async {
-                          },
+                          onPressed: () async {},
                           child: new Container(
                             padding: EdgeInsets.only(left: 30),
-                            child: SvgPicture.asset('assets/svg/09-MapLocation.svg',height: 22,width: 22,color: Colors.black,),
-
+                            child: SvgPicture.asset(
+                              'assets/svg/09-MapLocation.svg',
+                              height: 22,
+                              width: 22,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                     style: TextStyle(fontSize: 15),
-                      onTap: (){setState(() {
-                        _isDestinationSelected = false;
-                      }); resetSearchBox();},
-                      onChanged: (val) async {
+                      style: TextStyle(fontSize: 15),
+                      onTap: () {
+                        setState(() {
+                          _isDestinationSelected = false;
+                        });
+                        resetSearchBox();
                       },
-
+                      onChanged: (val) async {},
                     ),
-                  )
-              ),
+                  )),
             ),
           ],
         ),
       ),
     );
   }
+
   TextField1() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-            0, 10, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(20,0,10,0),
+              margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
               child: Text("try"),
-              width: 20, height: 20,
+              width: 20,
+              height: 20,
             ),
             Expanded(
               child: Padding(
-                  padding:
-                  const EdgeInsets
-                      .only(
-                      right: 10),
-                  child:               Container(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
                     color: Colors.black.withOpacity(0.1),
-                    padding:
-                    const EdgeInsets
-                        .only(
-                        left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: TextFormField(
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Choose Your Destination',hintStyle: TextStyle(fontSize: 14),
-                          labelStyle: TextStyle(fontSize: 14)
-                      ),
+                          hintText: 'Choose Your Destination',
+                          hintStyle: TextStyle(fontSize: 14),
+                          labelStyle: TextStyle(fontSize: 14)),
                     ),
-                  )
-              ),
+                  )),
             ),
           ],
         ),
@@ -590,31 +656,10 @@ class _DestinationPageState extends State<DestinationPage> {
     );
   }
 
-
   resetSearchBox() {
     setState(() {
-     // isFocus = false;
+      // isFocus = false;
       isShow = false;
     });
   }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

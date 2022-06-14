@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "181098435373",
+    "project_id": "sajilo-ventures",
+    "storage_bucket": "sajilo-ventures.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181098435373:android:224d68037e9fedf7e1f9a4",
+        "android_client_info": {
+          "package_name": "com.example.sajilo_ventures"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181098435373-9d52suq9kgk9lgk7dughs7l27fne9b1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0DgNTJ3tt3NayciRi6c7ypSsKON2XeEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181098435373-9d52suq9kgk9lgk7dughs7l27fne9b1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

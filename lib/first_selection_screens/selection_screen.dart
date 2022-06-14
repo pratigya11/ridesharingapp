@@ -1,15 +1,15 @@
 
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:ride_sharing_app/drawers/user_drawer_screen/user_drawer_page.dart';
 import 'package:ride_sharing_app/first_selection_screens/widgets/selection_screen_widget.dart';
 import 'package:ride_sharing_app/screens/home_screen/homePage.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:ride_sharing_app/app_export.dart';
-import 'package:ride_sharing_app/utils/Colors.dart';
+
 import 'package:ride_sharing_app/utils/staticWidget.dart';
 class StartingScreen extends StatefulWidget {
   const StartingScreen({ Key? key}) : super(key: key);
