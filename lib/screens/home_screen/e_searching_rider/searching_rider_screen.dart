@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -6,44 +5,48 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_sharing_app/app_export.dart';
+import 'package:ride_sharing_app/map_screen.dart';
 import 'package:ride_sharing_app/screens/home_screen/d_choose_vehicle_type/choose_vehicle_type_widget.dart';
 import 'package:ride_sharing_app/screens/home_screen/f_rider_Found/rider_found_screen.dart';
 import 'package:ride_sharing_app/utils/Colors.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class SearchingRiderScreen extends StatefulWidget {
+  static const routeName = 'searching-rider';
+
   @override
   _SearchingRiderScreenState createState() => _SearchingRiderScreenState();
 }
 
 class _SearchingRiderScreenState extends State<SearchingRiderScreen> {
-  LatLng _initialcameraposition = LatLng(27.7111287,85.322257);
+  LatLng _initialcameraposition = LatLng(27.7111287, 85.322257);
   String? val;
-  double?value;
+  double? value;
+  late final List<String> travelDetails;
 
   void initState() {
     value = 0;
     downloadData();
-    setState(() {
-
-    });
-
+    setState(() {});
   }
 
-  void downloadData(){
-    new Timer.periodic(
-        Duration(seconds: 1),
-            (Timer timer){
-          setState(() {
-            if(value == 1) {
-              timer.cancel();
-            }
-            else {
-              value = (value! + 0.1);
-            }
-          });
+  @override
+  void didChangeDependencies() {
+    travelDetails = ModalRoute.of(context)!.settings.arguments as List<String>;
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  void downloadData() {
+    new Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        if (value == 1) {
+          timer.cancel();
+        } else {
+          value = (value! + 0.1);
         }
-    );
+      });
+    });
   }
 
   @override
@@ -64,108 +67,84 @@ class _SearchingRiderScreenState extends State<SearchingRiderScreen> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: SlidingUpPanel(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                    minHeight: 150,
-                    maxHeight: 150,
-                    panel:  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      mainAxisAlignment:
-                      MainAxisAlignment.center,
-                      children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-
-                      child: LinearProgressIndicator(
-                        value: value,
-                      backgroundColor: Colors.black12,
-                        valueColor: AlwaysStoppedAnimation(ColorConstant.red700,),
-                        minHeight: 5,
-                      )
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
                       ),
-                    ),
-                        InkWell(
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => RiderFoundScreen()),
-                            );
-                          },
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: getHorizontalSize(
-                                  20.00,
-                                ),
-                                top: getVerticalSize(
-                                  40.00,
-                                ),
-                                right: getHorizontalSize(
-                                  20.00,
-                                ),
-                                bottom: getVerticalSize(
-                                  30.00,
-                                ),
+                      minHeight: 150,
+                      maxHeight: 150,
+                      panel: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Container(
+                                child: LinearProgressIndicator(
+                              value: value,
+                              backgroundColor: Colors.black12,
+                              valueColor: AlwaysStoppedAnimation(
+                                ColorConstant.red700,
                               ),
-                              child: Text(
-                                "Searching ride for you . . .",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: ColorConstant.black900,
-                                  fontSize: getFontSize(
-                                    16,
+                              minHeight: 5,
+                            )),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RiderFoundScreen()),
+                              );
+                            },
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: getHorizontalSize(
+                                    20.00,
                                   ),
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.50,
+                                  top: getVerticalSize(
+                                    40.00,
+                                  ),
+                                  right: getHorizontalSize(
+                                    20.00,
+                                  ),
+                                  bottom: getVerticalSize(
+                                    30.00,
+                                  ),
+                                ),
+                                child: Text(
+                                  "Searching ride for you . . .",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: ColorConstant.black900,
+                                    fontSize: getFontSize(
+                                      16,
+                                    ),
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.50,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    body: Stack(
-                      children: [
-                        GoogleMap(
-                          initialCameraPosition: CameraPosition(target: _initialcameraposition,zoom: 14),
-                          mapType: MapType.normal,
-                          //onMapCreated: _onMapCreated,
-                          zoomGesturesEnabled: true,
-                          myLocationEnabled: true,
-                          zoomControlsEnabled: true,
-                          myLocationButtonEnabled: false,
-                          padding: EdgeInsets.only(top: 0, right: 10),
-                          cameraTargetBounds: CameraTargetBounds.unbounded,
-                          // markers: _markers,
-                        ),
-                        Positioned(
-                          top: 30,
-                          left: 20,
-                          child: InkWell(
-                              onTap: (){},
-                              child: Icon(Icons.arrow_forward_ios_outlined)
-                          ),
-                        ),
+                        ],
+                      ),
+                      body: MapScreen(
+                          destination: travelDetails[1],
+                          origin: travelDetails[0])
+                      // currentLat == null ? Positioned(child: NoConnectionWidget(),bottom: 200,left: 0,right: 0,) : Container(),
+                      // Positioned(
+                      //   right: 23,
+                      //   bottom: 115,
+                      //   child: GpsBtn(
+                      //     onPressed: myCurrentLocation,
+                      //   ),
+                      // ),
 
-                        // currentLat == null ? Positioned(child: NoConnectionWidget(),bottom: 200,left: 0,right: 0,) : Container(),
-                        // Positioned(
-                        //   right: 23,
-                        //   bottom: 115,
-                        //   child: GpsBtn(
-                        //     onPressed: myCurrentLocation,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-
-
-                  ),
+                      ),
                 ),
               ),
             ],
@@ -174,8 +153,4 @@ class _SearchingRiderScreenState extends State<SearchingRiderScreen> {
       ),
     );
   }
-
 }
-
-
-

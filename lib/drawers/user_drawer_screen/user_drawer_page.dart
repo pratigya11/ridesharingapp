@@ -53,7 +53,7 @@ class UserDrawerPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -107,7 +107,8 @@ class UserDrawerPage extends StatelessWidget {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -141,7 +142,7 @@ class UserDrawerPage extends StatelessWidget {
                                                 ),
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                  BorderRadius.circular(
+                                                      BorderRadius.circular(
                                                     getSize(
                                                       30.00,
                                                     ),
@@ -203,9 +204,9 @@ class UserDrawerPage extends StatelessWidget {
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Deepankar Khanal",
@@ -274,17 +275,21 @@ class UserDrawerPage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-
-                                  Container(
-                                    height: getSize(
-                                      24.00,
-                                    ),
-                                    width: getSize(
-                                      24.00,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      ImageConstant.imgDownarrowou,
-                                      fit: BoxFit.fill,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: getHorizontalSize(60),
+                                        top: getVerticalSize(3)),
+                                    child: Container(
+                                      height: getSize(
+                                        24.00,
+                                      ),
+                                      width: getSize(
+                                        24.00,
+                                      ),
+                                      child: SvgPicture.asset(
+                                        ImageConstant.imgDownarrowou,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                 ],

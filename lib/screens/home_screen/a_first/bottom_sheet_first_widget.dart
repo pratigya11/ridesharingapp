@@ -17,7 +17,7 @@ class BottomScreenWidget extends StatelessWidget {
           6.00,
         ),
         bottom: getVerticalSize(
-          15.00,
+          10.00,
         ),
       ),
       child: Row(

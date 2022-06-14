@@ -36,6 +36,9 @@ dependencies:
   cached_network_image: ^3.2.0
   pull_to_refresh: ^2.0.0
   sliding_up_panel: ^2.0.0+1
+  google_place: ^0.4.7
+  custom_info_window: ^1.0.1
+  flutter_polyline_points: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -54,6 +57,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/joystick.png
+    - assets/pointer.png
     - assets/images/
 
 

@@ -1,10 +1,7 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ride_sharing_app/app_export.dart';
 import 'bottom_sheet_first_widget.dart';
-import 'package:ride_sharing_app/utils/color_constant.dart';
 
 class BottomScreen extends StatefulWidget {
   BottomScreen({required this.onPressed});
@@ -19,33 +16,27 @@ class _BottomScreenState extends State<BottomScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return  Container(
+    return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: ColorConstant
-            .whiteA700,
-        borderRadius:
-        BorderRadius.only(
-          topLeft:
-          Radius.circular(
+        color: ColorConstant.whiteA700,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
             getHorizontalSize(
               30.00,
             ),
           ),
-          topRight:
-          Radius.circular(
+          topRight: Radius.circular(
             getHorizontalSize(
               30.00,
             ),
           ),
-          bottomLeft:
-          Radius.circular(
+          bottomLeft: Radius.circular(
             getHorizontalSize(
               0.00,
             ),
           ),
-          bottomRight:
-          Radius.circular(
+          bottomRight: Radius.circular(
             getHorizontalSize(
               0.00,
             ),
@@ -53,14 +44,11 @@ class _BottomScreenState extends State<BottomScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorConstant
-                .black90040,
-            spreadRadius:
-            getHorizontalSize(
+            color: ColorConstant.black90040,
+            spreadRadius: getHorizontalSize(
               2.00,
             ),
-            blurRadius:
-            getHorizontalSize(
+            blurRadius: getHorizontalSize(
               2.00,
             ),
             offset: Offset(
@@ -71,79 +59,57 @@ class _BottomScreenState extends State<BottomScreen> {
         ],
       ),
       child: Column(
-        mainAxisSize:
-        MainAxisSize.min,
-        crossAxisAlignment:
-        CrossAxisAlignment
-            .start,
-        mainAxisAlignment:
-        MainAxisAlignment
-            .start,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Align(
-            alignment: Alignment
-                .center,
+            alignment: Alignment.center,
             child: Padding(
-              padding:
-              EdgeInsets
-                  .only(
-                left:
-                getHorizontalSize(
+              padding: EdgeInsets.only(
+                left: getHorizontalSize(
                   20.00,
                 ),
-                top:
-                getVerticalSize(
+                top: getVerticalSize(
                   30.00,
                 ),
-                right:
-                getHorizontalSize(
+                right: getHorizontalSize(
                   20.00,
                 ),
               ),
               child: Text(
                 "Going Somewhere, Uttam ?",
-                overflow:
-                TextOverflow
-                    .ellipsis,
-                textAlign:
-                TextAlign
-                    .left,
-                style:
-                TextStyle(
-                  color: ColorConstant
-                      .gray900,
-                  fontSize:
-                  getFontSize(
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: ColorConstant.gray900,
+                  fontSize: getFontSize(
                     16,
                   ),
-                  fontFamily:
-                  'Inter',
-                  fontWeight:
-                  FontWeight
-                      .w400,
-                  letterSpacing:
-                  0.50,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.50,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 20,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                      width: 1.2, color: ColorConstant
-                      .gray400)),
+                  border: Border.all(width: 1.2, color: ColorConstant.gray400)),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(
-                    getHorizontalSize(30.00),),
-                  color: ColorConstant
-                      .whiteA700,
+                  borderRadius: BorderRadius.circular(
+                    getHorizontalSize(30.00),
+                  ),
+                  color: ColorConstant.whiteA700,
                 ),
-
+                height: getVerticalSize(53),
                 child: InkWell(
                   onTap: () {
                     widget.onPressed();
@@ -155,89 +121,67 @@ class _BottomScreenState extends State<BottomScreen> {
                     // }
                   },
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           Padding(
-                            padding:
-                            EdgeInsets
-                                .only(
-                              left:
-                              getHorizontalSize(
+                            padding: EdgeInsets.only(
+                              left: getHorizontalSize(
                                 18.00,
                               ),
-                              right:
-                              getHorizontalSize(
+                              right: getHorizontalSize(
                                 10.00,
                               ),
                             ),
-                            child:
-                            Container(
-                              height:
-                              getSize(
+                            child: Container(
+                              height: getSize(
                                 24.00,
                               ),
-                              width:
-                              getSize(
+                              width: getSize(
                                 24.00,
                               ),
-                              child: SvgPicture
-                                  .asset(
-                                ImageConstant
-                                    .imgCarbonlocation,
-                                fit: BoxFit
-                                    .contain,
+                              child: SvgPicture.asset(
+                                ImageConstant.imgCarbonlocation,
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 10),
                             child: Text(
                               'Search Destination',
                               style: TextStyle(
-                                  color: ColorConstant
-                                      .gray400,
-                                  fontSize:  getFontSize(14.0),
+                                  color: ColorConstant.gray400,
+                                  fontSize: getFontSize(14.0),
                                   letterSpacing: 0.4),
                             ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding:
-                        EdgeInsets
-                            .only(
-                          left:
-                          getHorizontalSize(
+                        padding: EdgeInsets.only(
+                          left: getHorizontalSize(
                             10.00,
                           ),
-                          right:
-                          getHorizontalSize(
+                          right: getHorizontalSize(
                             18.00,
                           ),
                         ),
-                        child:
-                        Container(
-                          height:
-                          getSize(
+                        child: Container(
+                          height: getSize(
                             24.00,
                           ),
-                          width:
-                          getSize(
+                          width: getSize(
                             24.00,
                           ),
-                          child: SvgPicture
-                              .asset(
-                            ImageConstant
-                                .imgAkariconsplus,
-                            fit: BoxFit
-                                .contain,
+                          child: SvgPicture.asset(
+                            ImageConstant.imgAkariconsplus,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -245,141 +189,97 @@ class _BottomScreenState extends State<BottomScreen> {
             ),
           ),
           Padding(
-            padding:
-            EdgeInsets.only(
-              left:
-              getHorizontalSize(
+            padding: EdgeInsets.only(
+              left: getHorizontalSize(
                 20.00,
               ),
-              top:
-              getVerticalSize(
+              top: getVerticalSize(
                 20.00,
               ),
-              right:
-              getHorizontalSize(
+              right: getHorizontalSize(
                 20.00,
               ),
             ),
             child: Text(
               "Saved ",
-              overflow:
-              TextOverflow
-                  .ellipsis,
-              textAlign:
-              TextAlign
-                  .left,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
               style: TextStyle(
-                color:
-                ColorConstant
-                    .gray900,
-                fontSize:
-                getFontSize(
+                color: ColorConstant.gray900,
+                fontSize: getFontSize(
                   16,
                 ),
-                fontFamily:
-                'Inter',
-                fontWeight:
-                FontWeight
-                    .w400,
-                letterSpacing:
-                0.50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.50,
               ),
             ),
           ),
           Padding(
-            padding:
-            EdgeInsets.only(
-              left:
-              getHorizontalSize(
+            padding: EdgeInsets.only(
+              left: getHorizontalSize(
                 20.00,
               ),
-              top:
-              getVerticalSize(
-                10.00,
-              ),
-              right:
-              getHorizontalSize(
+              right: getHorizontalSize(
                 20.00,
               ),
             ),
-            child: ListView
-                .builder(
-              physics:
-              NeverScrollableScrollPhysics(),
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 2,
-              itemBuilder:
-                  (context,
-                  index) {
-                return BottomScreenWidget();
+              itemBuilder: (context, index) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BottomScreenWidget(),
+                    Divider(height: 4),
+                  ],
+                );
               },
             ),
           ),
           Align(
-            alignment: Alignment
-                .center,
+            alignment: Alignment.center,
             child: Padding(
-              padding:
-              EdgeInsets
-                  .only(
-                left:
-                getHorizontalSize(
+              padding: EdgeInsets.only(
+                left: getHorizontalSize(
                   20.00,
                 ),
-                top:
-                getVerticalSize(
+                top: getVerticalSize(
                   30.00,
                 ),
-                right:
-                getHorizontalSize(
+                right: getHorizontalSize(
                   20.00,
                 ),
-                bottom:
-                getVerticalSize(
+                bottom: getVerticalSize(
                   45.00,
                 ),
               ),
               child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment
-                    .spaceBetween,
-                crossAxisAlignment:
-                CrossAxisAlignment
-                    .center,
-                mainAxisSize:
-                MainAxisSize
-                    .max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding:
-                    EdgeInsets
-                        .only(
-                      bottom:
-                      getVerticalSize(
+                    padding: EdgeInsets.only(
+                      bottom: getVerticalSize(
                         0.27,
                       ),
                     ),
                     child: Row(
-                      crossAxisAlignment:
-                      CrossAxisAlignment
-                          .center,
-                      mainAxisSize:
-                      MainAxisSize
-                          .min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          height:
-                          getVerticalSize(
+                          height: getVerticalSize(
                             23.73,
                           ),
-                          width:
-                          getHorizontalSize(
+                          width: getHorizontalSize(
                             24.00,
                           ),
-                          child:
-                          Stack(
-                            alignment:
-                            Alignment.centerLeft,
+                          child: Stack(
+                            alignment: Alignment.centerLeft,
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
@@ -415,51 +315,43 @@ class _BottomScreenState extends State<BottomScreen> {
                           ),
                         ),
                         Container(
-                          height:
-                          getVerticalSize(
+                          height: getVerticalSize(
                             22.00,
                           ),
-                          width:
-                          getHorizontalSize(
+                          width: getHorizontalSize(
                             91.00,
                           ),
-                          margin:
-                          EdgeInsets.only(
-                            left:
-                            getHorizontalSize(
+                          margin: EdgeInsets.only(
+                            left: getHorizontalSize(
                               15.00,
                             ),
-                            top:
-                            getVerticalSize(
+                            top: getVerticalSize(
                               1.00,
                             ),
-                            bottom:
-                            getVerticalSize(
+                            bottom: getVerticalSize(
                               0.73,
                             ),
                           ),
-                          child:
-                          Stack(
-                            alignment:
-                            Alignment.centerLeft,
+                          child: Stack(
+                            alignment: Alignment.centerLeft,
                             children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Set on map",
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: ColorConstant.gray900,
-                                    fontSize: getFontSize(
-                                      16,
-                                    ),
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ),
+                              // Align(
+                              //   alignment: Alignment.centerLeft,
+                              //   child: Text(
+                              //     "Set on map",
+                              //     overflow: TextOverflow.ellipsis,
+                              //     textAlign: TextAlign.left,
+                              //     style: TextStyle(
+                              //       color: ColorConstant.gray900,
+                              //       fontSize: getFontSize(
+                              //         16,
+                              //       ),
+                              //       fontFamily: 'Inter',
+                              //       fontWeight: FontWeight.w400,
+                              //       letterSpacing: 0.50,
+                              //     ),
+                              //   ),
+                              // ),
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
@@ -484,20 +376,15 @@ class _BottomScreenState extends State<BottomScreen> {
                     ),
                   ),
                   Container(
-                    height:
-                    getSize(
+                    height: getSize(
                       24.00,
                     ),
-                    width:
-                    getSize(
+                    width: getSize(
                       24.00,
                     ),
-                    child: SvgPicture
-                        .asset(
-                      ImageConstant
-                          .imgEparrowright,
-                      fit: BoxFit
-                          .fill,
+                    child: SvgPicture.asset(
+                      ImageConstant.imgEparrowright,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],
@@ -509,5 +396,3 @@ class _BottomScreenState extends State<BottomScreen> {
     );
   }
 }
-
-
