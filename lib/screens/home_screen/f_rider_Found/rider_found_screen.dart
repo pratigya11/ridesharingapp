@@ -7,6 +7,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_sharing_app/app_export.dart';
 import 'package:ride_sharing_app/screens/home_screen/d_choose_vehicle_type/choose_vehicle_type_widget.dart';
+import 'package:ride_sharing_app/screens/home_screen/g_ride_cancel/cancel_ride1.dart';
 import 'package:ride_sharing_app/utils/Colors.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -1082,10 +1083,10 @@ class _RiderFoundScreenState extends State<RiderFoundScreen> {
                               ),
                               InkWell(
                                 onTap: (){
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => ConfirmDestinationScreen()),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => CancelRideScreen()),
+                                  );
                                 },
                                 child:Container(
                                   alignment: Alignment.center,
